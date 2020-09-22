@@ -12,7 +12,7 @@ user list
 
 <div class="container" th:object="${users}">
     <form action="#" th:action="@{/users/find}">
-        <input type="text" name="key" th:value="${keyword}">
+        <input type="text" name="keyword" th:value="${keyword}">
         <button type="submit">Search</button>
     </form>
     <div>

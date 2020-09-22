@@ -5,16 +5,20 @@ import com.quanlydanhba.model.User;
 import com.quanlydanhba.service.ICategoryService;
 import com.quanlydanhba.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Optional;
+
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
     @Autowired
     IUserService userService;
@@ -29,8 +33,7 @@ public class UserController {
 
     @GetMapping
     public String showList(Model model){
-        model.addAttribute("users",userService.findAll());
-        return "/list";
+        return "redirect:/users/find";
     }
 
     @GetMapping("/create")
@@ -45,5 +48,18 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("/create");
         userService.save(user);
         return modelAndView;
+    }
+
+    @GetMapping("/find")
+    public ModelAndView findByName(@RequestParam("keyword") Optional<String> keyword,
+                                   @PageableDefault(value = 5, page = 0)
+                                   @SortDefault(sort = "username", direction = Sort.Direction.DESC)
+                                           Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("/list");
+        Page<User> userPage = userService.findAllByUserContaining(keyword.orElse(""), pageable);
+        modelAndView.addObject("users", userPage);
+        modelAndView.addObject("keyword",keyword.orElse(""));
+        return modelAndView;
+
     }
 }
