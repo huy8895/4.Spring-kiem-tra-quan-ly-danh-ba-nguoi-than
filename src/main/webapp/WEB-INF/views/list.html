@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 </head>
-<body>
+<body class="container">
 <div class="container"></div>
-user list
+<h1>user list</h1>
 <a th:href="@{/users/create}">Create New user</a>
 
 <div class="container" th:object="${users}">
