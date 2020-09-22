@@ -62,4 +62,18 @@ public class UserController {
         return modelAndView;
 
     }
+    @GetMapping("/{id}/edit")
+    public ModelAndView showEdit(@PathVariable Long id){
+        ModelAndView modelAndView = new ModelAndView("/edit");
+        modelAndView.addObject("user",userService.findById(id));
+        return modelAndView;
+    }
+
+    @PostMapping("/{id}/edit")
+    public ModelAndView edit(User user){
+        ModelAndView modelAndView = new ModelAndView("/edit");
+        userService.save(user);
+        return modelAndView;
+    }
+
 }

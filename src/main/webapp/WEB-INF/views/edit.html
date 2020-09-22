@@ -7,5 +7,48 @@
 </head>
 <body>
 edit user
+<form th:object="${user}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <table>
+        <tr>
+            <td>
+                <label>username:
+                    <input type="text" th:field="*{username}">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>phone number:
+                <input type="text" th:field="*{phoneNumber}">
+                </label>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <label>address:
+                    <input type="text" th:field="*{address}">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>category:
+                <select th:field="*{category}">
+                    <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="edit">
+            </td>
+        </tr>
+    </table>
+
+
+
+
+</form>
+
 </body>
 </html>
