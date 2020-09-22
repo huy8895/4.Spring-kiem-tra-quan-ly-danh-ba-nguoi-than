@@ -70,10 +70,24 @@ public class UserController {
     }
 
     @PostMapping("/{id}/edit")
-    public ModelAndView edit(User user){
+    public String edit(User user){
         ModelAndView modelAndView = new ModelAndView("/edit");
         userService.save(user);
+        return "redirect:/users/find";
+    }
+
+    @GetMapping("/{id}/delete")
+    public ModelAndView showDelete(@PathVariable Long id){
+        ModelAndView modelAndView = new ModelAndView("/delete");
+        modelAndView.addObject("user",userService.findById(id));
         return modelAndView;
+    }
+
+    @PostMapping("/{id}/delete")
+    public String delete(User user){
+        ModelAndView modelAndView = new ModelAndView("/delete");
+        userService.remove(user.getId());
+        return "redirect:/users/find";
     }
 
 }
