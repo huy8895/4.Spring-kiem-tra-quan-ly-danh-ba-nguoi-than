@@ -1,5 +1,6 @@
 package com.quanlydanhba.service;
 
+import com.quanlydanhba.model.Category;
 import com.quanlydanhba.model.User;
 import com.quanlydanhba.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class UserServiceImpl implements IUserService{
     @Override
     public Page<User> findAllByUserContaining(String username, Pageable pageable) {
         return userRepository.findAllByUsernameContaining(username,pageable);
+    }
+
+    @Override
+    public Page<User> findAllByUsernameAndCategory(String username, Category category, Pageable pageable) {
+        return userRepository.findAllByUsernameAndCategory(username,category,pageable);
     }
 
     @Override

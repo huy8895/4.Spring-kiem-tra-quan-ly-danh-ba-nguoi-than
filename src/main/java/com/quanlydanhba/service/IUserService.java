@@ -1,5 +1,6 @@
 package com.quanlydanhba.service;
 
+import com.quanlydanhba.model.Category;
 import com.quanlydanhba.model.User;
 import com.quanlydanhba.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public interface IUserService {
     void remove(long id);
 
     Page<User> findAllByUserContaining(String firstName, Pageable pageable);
+
+    Page<User> findAllByUsernameAndCategory(String username, Category category, Pageable pageable);
 
     Iterable<User> findAllByProvince(User user);
 
