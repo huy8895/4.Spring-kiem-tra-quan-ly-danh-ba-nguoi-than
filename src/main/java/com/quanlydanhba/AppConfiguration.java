@@ -1,5 +1,7 @@
 package com.quanlydanhba;
 
+import com.quanlydanhba.service.IUserService;
+import com.quanlydanhba.service.UserServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -79,10 +81,10 @@ public class AppConfiguration extends WebMvcConfigurerAdapter implements Applica
         return viewResolver;
     }
 
-//    @Bean
-//    public ICustomerService customerService() {
-//        return new CustomerServiceImpl();
-//    }
+    @Bean
+    public IUserService userService() {
+        return new UserServiceImpl();
+    }
 //
 //    @Bean
 //    public IProvinceService provinceService() {
