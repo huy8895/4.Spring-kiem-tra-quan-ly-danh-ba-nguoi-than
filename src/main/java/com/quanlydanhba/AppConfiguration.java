@@ -1,5 +1,7 @@
 package com.quanlydanhba;
 
+import com.quanlydanhba.service.CategoryServiceImpl;
+import com.quanlydanhba.service.ICategoryService;
 import com.quanlydanhba.service.IUserService;
 import com.quanlydanhba.service.UserServiceImpl;
 import org.springframework.beans.BeansException;
@@ -86,10 +88,10 @@ public class AppConfiguration extends WebMvcConfigurerAdapter implements Applica
         return new UserServiceImpl();
     }
 //
-//    @Bean
-//    public IProvinceService provinceService() {
-//        return new ProvinceServiceImpl();
-//    }
+    @Bean
+    public ICategoryService categoryService() {
+        return new CategoryServiceImpl();
+    }
 
 //    @Bean
 //    public ICustomerRepository customerRepository() {
