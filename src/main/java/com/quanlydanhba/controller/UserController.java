@@ -44,10 +44,9 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ModelAndView crete(User user){
-        ModelAndView modelAndView = new ModelAndView("/create");
+    public String crete(User user){
         userService.save(user);
-        return modelAndView;
+        return "redirect:/users/find";
     }
 
     @GetMapping("/find")
