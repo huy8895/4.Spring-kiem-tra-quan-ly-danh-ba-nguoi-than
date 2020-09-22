@@ -51,11 +51,12 @@ public class UserController {
 
     @GetMapping("/find")
     public ModelAndView findByName(@RequestParam("keyword") Optional<String> keyword,
+                                   @RequestParam("category") Optional<Long> category,
                                    @PageableDefault(value = 5, page = 0)
                                    @SortDefault(sort = "username", direction = Sort.Direction.DESC)
                                            Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("/list");
-        Page<User> userPage = userService.findAllByUserContaining(keyword.orElse(""), pageable);
+        Page<User> userPage = userService.findAllByUsernameContainingAndCategory(keyword.orElse(""), categoryService.findById(category.orElse(1L)), pageable);
         modelAndView.addObject("users", userPage);
         modelAndView.addObject("keyword",keyword.orElse(""));
         return modelAndView;

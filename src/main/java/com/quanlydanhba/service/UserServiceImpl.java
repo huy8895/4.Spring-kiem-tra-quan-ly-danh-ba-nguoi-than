@@ -37,8 +37,8 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
-    public Page<User> findAllByUsernameAndCategory(String username, Category category, Pageable pageable) {
-        return userRepository.findAllByUsernameAndCategory(username,category,pageable);
+    public Page<User> findAllByUsernameContainingAndCategory(String username, Category category, Pageable pageable) {
+        return userRepository.findAllByUsernameContainingAndCategory(username,category,pageable);
     }
 
     @Override

@@ -33,9 +33,7 @@ delete user
         </tr>
         <tr>
             <td>category:
-                <select th:field="*{category}">
-                    <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"></option>
-                </select>
+                <input type="text" th:field="*{category.name}">
             </td>
         </tr>
         <tr>

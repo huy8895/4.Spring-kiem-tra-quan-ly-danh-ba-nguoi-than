@@ -18,7 +18,7 @@ public interface IUserService {
 
     Page<User> findAllByUserContaining(String firstName, Pageable pageable);
 
-    Page<User> findAllByUsernameAndCategory(String username, Category category, Pageable pageable);
+    Page<User> findAllByUsernameContainingAndCategory(String username, Category category, Pageable pageable);
 
     Iterable<User> findAllByProvince(User user);
 

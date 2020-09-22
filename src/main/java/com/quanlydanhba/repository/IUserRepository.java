@@ -9,5 +9,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface IUserRepository extends PagingAndSortingRepository<User,Long> {
     Page<User> findAllByUsernameContaining(String username, Pageable pageable);
-    Page<User> findAllByUsernameAndCategory(String username, Category category, Pageable pageable);
+
+    Page<User> findAllByUsernameContainingAndCategory(String username, Category category, Pageable pageable);
+
 }

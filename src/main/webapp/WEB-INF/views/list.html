@@ -13,7 +13,7 @@ user list
 <div class="container" th:object="${users}">
     <form action="#" th:action="@{/users/find}">
         <input type="text" name="keyword" th:value="${keyword}">
-        <select>
+        <select name="category">
             <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"></option>
         </select>
         <button type="submit">Search</button>
