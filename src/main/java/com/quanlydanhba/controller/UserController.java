@@ -4,6 +4,7 @@ import com.quanlydanhba.model.Category;
 import com.quanlydanhba.model.User;
 import com.quanlydanhba.service.ICategoryService;
 import com.quanlydanhba.service.IUserService;
+import com.sun.javafx.iio.gif.GIFImageLoaderFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -49,18 +50,37 @@ public class UserController {
         return "redirect:/users/find";
     }
 
+//    @GetMapping("/find")
+//    public ModelAndView findByName(@RequestParam("keyword") Optional<String> keyword,
+//                                   @RequestParam("category") Optional<Long> category,
+//                                   @PageableDefault(value = 5, page = 0)
+//                                   @SortDefault(sort = "username", direction = Sort.Direction.DESC)
+//                                           Pageable pageable) {
+//        ModelAndView modelAndView = new ModelAndView("/list");
+//        Page<User> userPage = userService.findAllByUsernameContainingAndCategory(keyword.orElse(""), categoryService.findById(category.orElse(1L)), pageable);
+//        modelAndView.addObject("users", userPage);
+//        modelAndView.addObject("keyword",keyword.orElse(""));
+//        return modelAndView;
+//
+//    }
     @GetMapping("/find")
     public ModelAndView findByName(@RequestParam("keyword") Optional<String> keyword,
-                                   @RequestParam("category") Optional<Long> category,
+                                   @RequestParam("category") Optional<Category> category,
                                    @PageableDefault(value = 5, page = 0)
                                    @SortDefault(sort = "username", direction = Sort.Direction.DESC)
                                            Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("/list");
-        Page<User> userPage = userService.findAllByUsernameContainingAndCategory(keyword.orElse(""), categoryService.findById(category.orElse(1L)), pageable);
+        Page<User> userPage;
+        if (category.isPresent()){
+            userPage = userService.findAllByUsernameContainingAndCategory(keyword.orElse(""), category.get(), pageable);
+        }
+        else {
+            userPage = userService.findAllByUserContaining(keyword.orElse(""),pageable);
+        }
+//        Page<User> userPage = userService.findAllByUsernameContainingAndCategory(keyword.orElse(""), category.get(), pageable);
         modelAndView.addObject("users", userPage);
         modelAndView.addObject("keyword",keyword.orElse(""));
         return modelAndView;
-
     }
     @GetMapping("/{id}/edit")
     public ModelAndView showEdit(@PathVariable Long id){
